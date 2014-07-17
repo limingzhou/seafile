@@ -68,4 +68,6 @@
   <!-- <?define ProductGuid="41E18CDA-69BC-4E5E-BB17-424D8D01F1F9" ?> (4.0.4) -->
   <?define ProductGuid="AC9AE580-FDE2-472F-8BF1-B14C08F8A654" ?>
 
+  <?define ShellGuid="D14BEDD3-4E05-4F2F-B0DE-C0381E6AE606" ?>
+
 </Include>
