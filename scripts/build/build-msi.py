@@ -308,10 +308,12 @@ class SeafileClient(Project):
     name = 'seafile-client'
     def __init__(self):
         Project.__init__(self)
+        make = get_make_path()
         self.build_commands = [
             'cmake -G "MSYS Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=%s .' % to_mingw_path(self.prefix),
-            get_make_path(),
-            '%s install' % get_make_path(),
+            make,
+            '%s install' % make,
+            "bash extensions/build.sh",
         ]
 
     def get_version(self):
@@ -406,7 +408,7 @@ def validate_args(usage, options):
     conf[CONF_BUILDDIR] = builddir
     conf[CONF_SRCDIR] = srcdir
     conf[CONF_OUTPUTDIR] = outputdir
-    conf[CONF_KEEP] = keep
+    conf[CONF_KEEP] = True
     conf[CONF_DEBUG] = debug
     conf[CONF_ONLY_CHINESE] = onlychinese
     conf[CONF_QT_ROOT] = qt_root
@@ -632,7 +634,9 @@ def copy_dll_exe():
         os.path.join(prefix, 'bin', 'libseafile-0.dll'),
         os.path.join(prefix, 'bin', 'ccnet.exe'),
         os.path.join(prefix, 'bin', 'seaf-daemon.exe'),
-        os.path.join(SeafileClient().projdir, 'seafile-applet.exe')
+        os.path.join(SeafileClient().projdir, 'seafile-applet.exe'),
+        os.path.join(SeafileClient().projdir, 'extensions', 'lib', 'seafile_shell_ext.dll'),
+        os.path.join(SeafileClient().projdir, 'extensions', 'lib', 'seafile_shell_ext64.dll'),
     ]
 
     for name in filelist:
